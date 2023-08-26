@@ -1,4 +1,4 @@
-import { UrlIdValidationError } from "../src/UrlIdValidationError";
+import { UrlIdValidationError } from "../../src/UrlIdValidationError";
 
 describe("UrlIdValidationError", () => {
   it("Should create an UrlIdValidationError", () => {

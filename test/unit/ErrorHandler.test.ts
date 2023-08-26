@@ -1,6 +1,6 @@
 import { request, response, Request, Response } from "express";
-import { ErrorHandler } from "../src/ErrorHandler";
-import { UrlIdValidationError } from "../src/UrlIdValidationError";
+import { ErrorHandler } from "../../src/rest/ErrorHandler";
+import { UrlIdValidationError } from "../../src/UrlIdValidationError";
 
 describe("ErrorHandler", () => {
   it("Should generate an Error response for a UrlIdValidationError", () => {
