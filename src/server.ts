@@ -1,10 +1,10 @@
 import { Application } from "./Application";
 import { Route } from "./Route";
-import { SecretByIdController } from "./SecretByIdController";
-import { SecretByIdRoute } from "./SecretByIdRoute";
+import { SecretsByIdController } from "./SecretsByIdController";
+import { SecretByIdRoute } from "./SecretsByIdRoute";
 
-const secretByIdController = new SecretByIdController();
-const secretByIdRoute = new SecretByIdRoute(secretByIdController);
+const secretsByIdController = new SecretsByIdController();
+const secretByIdRoute = new SecretByIdRoute(secretsByIdController);
 
 const routeList: Route[] = [];
 routeList.push(secretByIdRoute);

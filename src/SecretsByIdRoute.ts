@@ -1,13 +1,13 @@
 import { Application } from "express";
 import { Route } from "./Route";
-import { SecretByIdController } from "./SecretByIdController";
+import { SecretsByIdController } from "./SecretsByIdController";
 
 export class SecretByIdRoute implements Route {
-  constructor(private secretByIdController: SecretByIdController) {}
+  constructor(private SecretsByIdController: SecretsByIdController) {}
 
   mountRoute(application: Application): void {
     application
       .route("/api/v1/secrets/:urlId")
-      .get(this.secretByIdController.retrieveSecret);
+      .get(this.SecretsByIdController.retrieveSecret);
   }
 }
