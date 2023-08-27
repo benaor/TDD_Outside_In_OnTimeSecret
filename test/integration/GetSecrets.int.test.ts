@@ -14,7 +14,15 @@ describe("Get secrets integration tests", () => {
     });
   });
 
-  xit("Should return an error when the secret doesn't exist in the system", () => {});
+  it("Should return an error when the secret doesn't exist in the system", async () => {
+    const response = await request.get("/api/v1/secrets/nonexistantsecret");
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      name: "SecretNotFoundError",
+      message: "Secret was not found in the system",
+    });
+  });
 
   xit("Should retrieve a secret from the system", () => {});
 });
