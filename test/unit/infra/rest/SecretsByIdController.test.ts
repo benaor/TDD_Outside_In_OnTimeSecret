@@ -24,7 +24,7 @@ describe("SecretsByIdController", () => {
     expect(next).toBeCalledWith(new UrlIdValidationError("UrlId is too short"));
   });
 
-  it("should throw an error if the Secret was not found", () => {
+  it("should throw an error if the Secret was not found", async () => {
     const req: Request = expect.any(request);
     req.params = { urlId: "azertyuiop123456789" };
     const res: Response = expect.any(response);
@@ -37,7 +37,7 @@ describe("SecretsByIdController", () => {
     };
 
     const secretsByIdController = new SecretsByIdController(secretRetriever);
-    secretsByIdController.retrieveSecret(req, res, next);
+    await secretsByIdController.retrieveSecret(req, res, next);
 
     expect(next).toBeCalledTimes(1);
     expect(next).toBeCalledWith(new SecretNotFoundError());
