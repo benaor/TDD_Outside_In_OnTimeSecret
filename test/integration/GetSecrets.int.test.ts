@@ -1,5 +1,6 @@
 import supertest from "supertest";
 import server from "../../src/server";
+import { SecretModel } from "../../src/infra/repositories/SecretModel";
 
 const request = supertest(server);
 
@@ -15,6 +16,8 @@ describe("Get secrets integration tests", () => {
   });
 
   it("Should return an error when the secret doesn't exist in the system", async () => {
+    SecretModel.findOne = jest.fn().mockResolvedValue(null);
+
     const response = await request.get("/api/v1/secrets/nonexistantsecret");
 
     expect(response.status).toBe(404);
