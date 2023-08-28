@@ -27,5 +27,19 @@ describe("Get secrets integration tests", () => {
     });
   });
 
-  xit("Should retrieve a secret from the system", () => {});
+  it("Should retrieve a secret from the system", async () => {
+    SecretModel.deleteOne = jest.fn();
+    SecretModel.findOne = jest.fn().mockResolvedValue({
+      secret: "my secret",
+    });
+
+    const response = await request.get("/api/v1/secrets/existantsecret");
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      secret: "my secret",
+    });
+  });
+
+  it("Should Throw a 500 error when unexpected error is throw", async () => {});
 });

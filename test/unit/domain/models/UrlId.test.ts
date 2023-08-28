@@ -12,4 +12,10 @@ describe("UrlId", () => {
       new UrlIdValidationError("UrlId is too short")
     );
   });
+
+  it("Should return a string representation of the UrlId", () => {
+    expect(new UrlId("AZERTYUIOP123456789").toString()).toBe(
+      "AZERTYUIOP123456789"
+    );
+  });
 });

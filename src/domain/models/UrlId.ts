@@ -5,4 +5,8 @@ export class UrlId {
     if (urlId.length < 10) throw new UrlIdValidationError("UrlId is too short");
     this.urlId = urlId;
   }
+
+  toString(): string {
+    return this.urlId;
+  }
 }

@@ -10,6 +10,8 @@ export class SecretsByIdController {
     try {
       const urlId = new UrlId(req.params.urlId);
       const secret = await this.secretRetriever.retrieveSecretByUrlId(urlId);
+
+      res.status(200).json(secret);
     } catch (error) {
       next(error);
     }
