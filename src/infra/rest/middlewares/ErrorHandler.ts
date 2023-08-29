@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { SecretNotFoundError } from "../../../domain/errors/SecretNotFoundError";
 import { UrlIdValidationError } from "../../../domain/errors/UrlIdValidationError";
+import { RequestValidationError } from "../RequestValidationError";
+import { SecretValidationError } from "../../../domain/errors/SecretValidationError";
 
 export function ErrorHandler(
   error: Error,
@@ -10,7 +12,11 @@ export function ErrorHandler(
 ) {
   const { message, name } = error;
 
-  if (error instanceof UrlIdValidationError) {
+  if (
+    error instanceof UrlIdValidationError ||
+    error instanceof RequestValidationError ||
+    error instanceof SecretValidationError
+  ) {
     response.status(400).json({
       name,
       message,

@@ -8,6 +8,6 @@ export class SecretsRoute implements Route {
   mountRoute(application: Application): void {
     application
       .route("/api/v1/secrets")
-      .get(this.secretsController.storeSecret);
+      .post(this.secretsController.storeSecret);
   }
 }

@@ -6,10 +6,18 @@ export class Application {
   private expressApp: express.Application = express();
 
   constructor(private routeList: Route[]) {
-    this.routeList.forEach((route) => {
-      route.mountRoute(this.expressApp);
-    });
+    this.appConfiguration();
+    this.mountRoutes();
+  }
+
+  private mountRoutes() {
+    this.routeList.forEach((route) => route.mountRoute(this.expressApp));
     this.expressApp.use(ErrorHandler);
+  }
+
+  private appConfiguration() {
+    this.expressApp.use(express.json());
+    this.expressApp.use(express.urlencoded({ extended: true }));
   }
 
   getExpressApplication(): express.Application {
