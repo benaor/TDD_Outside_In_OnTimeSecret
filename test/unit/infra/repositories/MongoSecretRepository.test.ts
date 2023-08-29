@@ -70,4 +70,21 @@ describe("MongoSecretRepository tets", () => {
     expect(SecretModel.deleteOne).toBeCalledTimes(1);
     expect(SecretModel.deleteOne).toBeCalledWith(urlId);
   });
+
+  it("should store urlId and Secret into the database", async () => {
+    // @ts-ignore
+    mongoose.connection.readyState = 1;
+    SecretModel.create = jest.fn();
+    mongoose.connect = jest.fn();
+
+    const urlId = new UrlId("123456rtyree");
+    const secret = new Secret("asd3e324dsas");
+    const mongoSecretRepository = new MongoSecretRepository();
+    await mongoSecretRepository.storeUrlIdAndSecret(urlId, secret);
+    expect(SecretModel.create).toBeCalledTimes(1);
+    expect(SecretModel.create).toBeCalledWith({
+      urlId: "123456rtyree",
+      secret: "asd3e324dsas",
+    });
+  });
 });

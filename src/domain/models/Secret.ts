@@ -6,7 +6,7 @@ export class Secret {
       throw new SecretValidationError("Secret is too short");
   }
 
-  public get getSecret(): string {
+  public toString(): string {
     return this.secret;
   }
 }

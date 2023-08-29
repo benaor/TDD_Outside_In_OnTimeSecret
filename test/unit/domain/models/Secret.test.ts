@@ -12,6 +12,6 @@ describe("Secret", () => {
 
   it("Should return secret", () => {
     const secret = new Secret("my Secret");
-    expect(secret.getSecret).toBe("my Secret");
+    expect(secret.toString()).toBe("my Secret");
   });
 });
