@@ -8,17 +8,22 @@ export function ErrorHandler(
   response: Response,
   next: NextFunction
 ) {
+  const { message, name } = error;
+
   if (error instanceof UrlIdValidationError) {
     response.status(400).json({
-      name: error.name,
-      message: error.message,
+      name,
+      message,
     });
-  }
-
-  if (error instanceof SecretNotFoundError) {
+  } else if (error instanceof SecretNotFoundError) {
     response.status(404).json({
-      name: error.name,
-      message: error.message,
+      name,
+      message,
+    });
+  } else {
+    response.status(500).json({
+      name: "InternalServerError",
+      message: "Something went wrong",
     });
   }
 }

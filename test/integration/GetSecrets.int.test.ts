@@ -41,5 +41,17 @@ describe("Get secrets integration tests", () => {
     });
   });
 
-  it("Should Throw a 500 error when unexpected error is throw", async () => {});
+  it("Should Throw a 500 error when unexpected error is throw", async () => {
+    SecretModel.findOne = jest
+      .fn()
+      .mockRejectedValue(new Error("Unexpected error"));
+
+    const response = await request.get("/api/v1/secrets/throwerror");
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      name: "InternalServerError",
+      message: "Something went wrong",
+    });
+  });
 });

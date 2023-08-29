@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { UrlIdValidationError } from "../../domain/errors/UrlIdValidationError";
 import { UrlId } from "../../domain/models/UrlId";
 import { SecretRetriever } from "../../services/SecretRetriever";
 
