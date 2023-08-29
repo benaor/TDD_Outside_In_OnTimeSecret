@@ -6,15 +6,17 @@ import { OneTimeSecretRetriever } from "./services/OneTimeSecretRetriever";
 import { MongoSecretRepository } from "./infra/repositories/MongoSecretRepository";
 import { SecretsRoute } from "./infra/rest/SecretsRoute";
 import { SecretsController } from "./infra/rest/SecretsController";
+import { OneTimeSecretStorer } from "./services/OneTimeSecretStorer";
 
-const secretStorer = {
-  storeSecret: () => {
+const tokenGenerator = {
+  generateToken: () => {
     throw new Error("Not implemented");
   },
 };
 
 const secretRepository = new MongoSecretRepository();
 const secretRetriever = new OneTimeSecretRetriever(secretRepository);
+const secretStorer = new OneTimeSecretStorer(secretRepository, tokenGenerator);
 
 const secretsController = new SecretsController(secretStorer);
 const secretsByIdController = new SecretsByIdController(secretRetriever);

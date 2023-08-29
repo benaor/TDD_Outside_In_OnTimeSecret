@@ -3,6 +3,7 @@ import { Secret } from "../domain/models/Secret";
 import { UrlId } from "../domain/models/UrlId";
 import { SecretRepository } from "./SecretRepository";
 import { SecretRetriever } from "./SecretRetriever";
+import { TokenGenerator } from "./TokenGenerator";
 
 export class OneTimeSecretRetriever implements SecretRetriever {
   constructor(private secretRepository: SecretRepository) {}
