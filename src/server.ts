@@ -4,13 +4,20 @@ import { SecretsByIdController } from "./infra/rest/SecretsByIdController";
 import { SecretByIdRoute } from "./infra/rest/SecretsByIdRoute";
 import { OneTimeSecretRetriever } from "./services/OneTimeSecretRetriever";
 import { MongoSecretRepository } from "./infra/repositories/MongoSecretRepository";
+import { SecretsRoute } from "./infra/rest/SecretsRoute";
+import { SecretsController } from "./infra/rest/SecretsController";
 
 const secretRepository = new MongoSecretRepository();
 const secretRetriever = new OneTimeSecretRetriever(secretRepository);
+
+const secretsController = new SecretsController();
 const secretsByIdController = new SecretsByIdController(secretRetriever);
+
+const secretsRoute = new SecretsRoute(secretsController);
 const secretByIdRoute = new SecretByIdRoute(secretsByIdController);
 
 const routeList: Route[] = [];
+routeList.push(secretsRoute);
 routeList.push(secretByIdRoute);
 
 const application = new Application(routeList);
