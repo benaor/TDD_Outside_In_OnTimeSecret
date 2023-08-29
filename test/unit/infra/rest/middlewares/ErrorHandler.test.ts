@@ -2,7 +2,7 @@ import { request, response, Request, Response } from "express";
 import { ErrorHandler } from "../../../../../src/infra/rest/middlewares/ErrorHandler";
 import { UrlIdValidationError } from "../../../../../src/domain/errors/UrlIdValidationError";
 import { SecretNotFoundError } from "../../../../../src/domain/errors/SecretNotFoundError";
-import { RequestValidationError } from "../../../../../src/infra/rest/RequestValidationError";
+import { RequestValidationError } from "../../../../../src/infra/rest/controllers/RequestValidationError";
 import { SecretValidationError } from "../../../../../src/domain/errors/SecretValidationError";
 
 describe("ErrorHandler", () => {

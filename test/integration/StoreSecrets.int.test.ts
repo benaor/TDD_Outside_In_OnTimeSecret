@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import server from "../../src/server";
-import { SecretModel } from "../../src/infra/repositories/SecretModel";
+import { SecretModel } from "../../src/infra/repositories/mongo/SecretModel";
 
 const request = supertest(server);
 
@@ -58,5 +58,19 @@ describe("Store secrets integration tests", () => {
     expect(response.status).toBe(201);
     expect(response.body.urlId.length).toBeGreaterThanOrEqual(10);
   });
-  xit("Should return an unhandled exception error", () => {});
+  it("should return an unhandled exception error", async () => {
+    SecretModel.create = jest.fn().mockImplementation(async () => {
+      throw new Error("Sever memory is full");
+    });
+
+    const response = await request.post("/api/v1/secrets").send({
+      secret: "myvalidsecret22",
+    });
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      name: "InternalServerError",
+      message: "Something went wrong",
+    });
+  });
 });

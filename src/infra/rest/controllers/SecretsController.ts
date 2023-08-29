@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { RequestValidationError } from "./RequestValidationError";
-import { Secret } from "../../domain/models/Secret";
-import { SecretStorer } from "../../services/SecretStorer";
+import { Secret } from "../../../domain/models/Secret";
+import { SecretStorer } from "../../../domain/ports/out/SecretStorer";
 
 export class SecretsController {
   constructor(private secretStorer: SecretStorer) {}

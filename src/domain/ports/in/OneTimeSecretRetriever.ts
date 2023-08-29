@@ -1,9 +1,8 @@
-import { SecretNotFoundError } from "../domain/errors/SecretNotFoundError";
-import { Secret } from "../domain/models/Secret";
-import { UrlId } from "../domain/models/UrlId";
-import { SecretRepository } from "./SecretRepository";
+import { SecretNotFoundError } from "../../errors/SecretNotFoundError";
+import { Secret } from "../../models/Secret";
+import { UrlId } from "../../models/UrlId";
+import { SecretRepository } from "../../../infra/repositories/SecretRepository";
 import { SecretRetriever } from "./SecretRetriever";
-import { TokenGenerator } from "../infra/externalServices/TokenGenerator";
 
 export class OneTimeSecretRetriever implements SecretRetriever {
   constructor(private secretRepository: SecretRepository) {}
